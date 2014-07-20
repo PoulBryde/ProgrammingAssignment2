@@ -20,22 +20,18 @@ makeCacheMatrix <- function(x = matrix()) {
     x <<- newMatrix
     inverse <<- NULL
   }
-  
   get <- function() {
     x
   }
-  
   setInverse <- function(newInverse) {
     inverse <<- newInverse
   }
-  
   getInverse <- function() {
     inverse
   }
   
   list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 }
-
 
 ##
 ## Given a cached matrix the function returns the inverse of the matrix. If the 
@@ -49,11 +45,11 @@ makeCacheMatrix <- function(x = matrix()) {
 ##   the inverse of the cached matrix
 ##
 cacheSolve <- function(x, ...) {
-  inverse <- cachedMatrix$getInverse()
+  inverse <- x$getInverse()
   if (is.null(inverse)) {
-    matrix <- cachedMatrix$get()
+    matrix <- x$get()
     inverse <- solve(matrix, ...)
-    cachedMatrix$setInverse(inverse)
+    x$setInverse(inverse)
   }
   inverse
 }
